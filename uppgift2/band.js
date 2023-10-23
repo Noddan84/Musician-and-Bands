@@ -1,48 +1,33 @@
-export default class Band 
-{
-  bandName;
-  bandBirth;
+export default class Band {
+  bandInfo;
+  bandName;  
   bandAge;
+  bandBirth;
   bandMusicians;
-  bandHistory;
+  bandRetire;
   formerMembers;
 
-  constructor(bandName, bandBirth, bandAge, bandMusicians, bandHistory, formerMembers) {
+
+  constructor(bandName, bandInfo, bandBirth, bandRetire, bandMusicians = [], formerMembers, bandAge) {
+    
     this.bandName = bandName;
+    this.bandInfo = bandInfo;
     this.bandBirth = bandBirth;
-    this.bandAge = bandAge;
-    this.bandMusicians = bandMusicians;
-    this.bandHistory = bandHistory;
+    this.bandRetire = bandRetire;
+    this.bandMusicians = bandMusicians;    
     this.formerMembers = formerMembers;
-  }
+    this.bandAge = bandAge;
+  }  
 
-  get bandName()
-  {
-    return this.bandName;
-  }
-
-  get bandBirth()
-  {
-    return this.bandBirth;
-  }
-
-  get bandAge()
-  {
-    return this.bandAge;
-  }
-
-  get bandMusicians()
-  {
-    return this.bandMusicians;
-  }
-
-  get bandHistory()
-  {
-    return this.bandHistory;
-  }
-
-  get formerMembers()
-  {
-    return this.formerMembers;
+  dataInfoBand() {
+    
+    return {
+      "Bandname": this.bandName,
+      "BandInfo": this.bandInfo,            
+      "BandBirth": this.bandBirth,
+      "BandRetire": this.bandRetire,
+      "BandMusicians": this.bandMusicians,      
+    };
   }
 }
+

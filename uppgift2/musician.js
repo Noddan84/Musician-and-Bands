@@ -1,25 +1,38 @@
-export default class Musician
-{
+export default class Musician {
+  
   musicianName;
-  musicianBirth;
-  musicianAge;
-  musicianBand;
+  musicianInfo; 
   musicianInstrument;
-  musicianHistory;
+  musicianBand;  
+  musicianBandHistory;
 
-  constructor(musicianName, musicianBirth, musicianAge, musicianBand, musicianInstrument, musicianHistory)
-  {
+  constructor(musicianName, musicianInfo, musicianInstrument, musicianBand, musicianBandHistory) {
+    
     this.musicianName = musicianName;
-    this.musicianBirth = musicianBirth;
-    this.musicianAge = musicianAge;
-    this.musicianBand = musicianBand;
+    this.musicianInfo = musicianInfo;
     this.musicianInstrument = musicianInstrument;
-    this.musicianHistory = musicianHistory;
+    this.musicianBand = musicianBand;    
+    this.musicianBandHistory = musicianBandHistory;
   }
 
-  createMusician()
-  {
-    
+  
+
+  getAge() {
+    const currentYear = new Date().getFullYear();
+    return currentYear - this.musicianBirth;
+  }
+
+  getFormerBands() {
+    return this.musicianBandHistory;
+  }
+
+  dataInfoMusician() {
+    return {
+      "MusicianName": this.musicianName,
+      "MusicianInfo": this.musicianInfo,
+      "MusicianInstrument": this.musicianInstrument,
+      "MusicianBand": this.musicianBand     
+    };
   }
 
 }
