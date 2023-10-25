@@ -3,12 +3,12 @@ export default class Band {
   bandName;  
   bandAge;
   bandBirth;
-  bandMusicians;
+  bandMusicians = [];
   bandRetire;
-  formerMembers;
+  formerMembers = [];
 
 
-  constructor(bandName, bandInfo, bandBirth, bandRetire, bandMusicians = [], formerMembers, bandAge) {
+  constructor(bandName, bandInfo, bandBirth, bandRetire, bandMusicians = [], formerMembers = [], bandAge) {
     
     this.bandName = bandName;
     this.bandInfo = bandInfo;

@@ -1,9 +1,23 @@
 [
   {
-    "Bandname": "hajarna",
-    "BandInfo": "dansband",
-    "BandBirth": "2001",
-    "BandRetire": "2003",
-    "BandMusicians": []
+    "bandInfo": "dansband",
+    "bandName": "helges",
+    "bandBirth": "2003",
+    "bandMusicians": {
+      "musicianName": "Yngve",
+      "musicianInfo": "dansband",
+      "musicianInstrument": "mungiga",
+      "musicianBand": "arnolds"
+    },
+    "bandRetire": "2006",
+    "formerMembers": []
+  },
+  {
+    "bandInfo": "dansband",
+    "bandName": "Hasses",
+    "bandBirth": "'1999",
+    "bandMusicians": [],
+    "bandRetire": "'2001",
+    "formerMembers": []
   }
 ]

@@ -6,7 +6,7 @@ export default class Musician {
   musicianBand;  
   musicianBandHistory;
 
-  constructor(musicianName, musicianInfo, musicianInstrument, musicianBand, musicianBandHistory) {
+  constructor(musicianName, musicianInfo, musicianInstrument, musicianBand = [], musicianBandHistory) {
     
     this.musicianName = musicianName;
     this.musicianInfo = musicianInfo;
@@ -21,6 +21,7 @@ export default class Musician {
     const currentYear = new Date().getFullYear();
     return currentYear - this.musicianBirth;
   }
+  
 
   getFormerBands() {
     return this.musicianBandHistory;

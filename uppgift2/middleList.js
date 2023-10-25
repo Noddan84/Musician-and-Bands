@@ -7,7 +7,7 @@ import Musician from "./musician.js";
 
 export default class middleList {
 
-  bandList = []; //en array med bandobjekt
+  bandList = [];
   bandID = {};
   musicianList = [];
   musicianID = {};
@@ -16,6 +16,7 @@ export default class middleList {
   constructor() {
     this.fetchBandData();
     this.fetchMusicianData();
+    
   }
 
   get bandList() {
@@ -41,30 +42,12 @@ export default class middleList {
 
     const data = fs.readFileSync("bands.json");
     this.bandList = JSON.parse(data);
-
-
-    //console.log(this.bandList.length);
-    for (let i = 0; i < this.bandList.length; i++) {
-      this.bandList.push(new Band(this.bandList[i].bandName, this.bandList[i].bandInfo, this.bandList[i].bandBirth, this.bandList[i].bandRetire));
-
-    }
-    //console.log(this.bandList.length);
-
   }
 
   fetchMusicianData() {
 
     const data2 = fs.readFileSync("musicians.json");
     this.musicianList = JSON.parse(data2);
-
-
-    //console.log(this.musicianList.length);
-    for (let i = 0; i < this.musicianList.length; i++) {
-      this.musicianList.push(new Musician(this.musicianList[i].musicianName, this.musicianList[i].musicianInfo, this.musicianList[i].musicianInstrument, this.musicianList[i].musicianBand));
-
-    }
-    //console.log(this.musicianList.length);
-
   }
 
 
@@ -73,12 +56,19 @@ export default class middleList {
   showBandInfo() {
     for (let i = 0; i < this.bandList.length; i++) {
       console.log(`${i + 1}. ${this.bandList[i].bandInfo}`); //skriver ut namn från bandklassen
-      console.log(`${i + 1}. ${this.bandList[i].bandName}`);
-      console.log(`${i + 1}. ${this.bandList[i].bandAge}`);
+      console.log(`${i + 1}. ${this.bandList[i].bandName}`);      
       console.log(`${i + 1}. ${this.bandList[i].bandBirth}`);
       console.log(`${i + 1}. ${this.bandList[i].bandRetire}`);
-      console.log(`${i + 1}. ${this.bandList[i].bandMusicians}`);
-      console.log(`${i + 1}. ${this.bandList[i].formerMembers}`);
+      console.log(`${i + 1}. ${this.bandList[i].bandMusicians}`);      
+    }
+  }
+
+  showMusicianInfo() {
+    for (let i = 0; i < this.musicianList.length; i++) {
+      console.log(`${i + 1}. ${this.musicianList[i].musicianInfo}`); //skriver ut namn från bandklassen
+      console.log(`${i + 1}. ${this.musicianList[i].musicianName}`);
+      console.log(`${i + 1}. ${this.musicianList[i].musicianInstrument}`);
+      console.log(`${i + 1}. ${this.musicianList[i].musicianBand}`);      
     }
   }
 
@@ -95,6 +85,13 @@ export default class middleList {
     this.updateJsonFile(); //uppdaterar bands.json    
   }
 
+  addBandToMusician(indexBand2, indexMusician2) {
+    this.musicianList[indexMusician2].musicianBand = this.bandList[indexBand2];
+    // console.log(this.artistList[indexArtist2].memberInfo);
+    this.updateJsonFile2();
+
+  }
+
   addMusicianToList() {
     let musicianName = prompt("What's the name of the musician?");
     let musicianInfo = prompt("What music does the musician play?");
@@ -107,9 +104,80 @@ export default class middleList {
     this.updateJsonFile2(); //uppdaterar musicians.json
   }
 
-  removeBandfromList(index) {
-    this.bandList.splice(index, 1);
+  addMusicianToBand(indexBand, indexMusician) {
+
+    this.bandList[indexBand].bandMusicians.push(this.musicianList[indexMusician]);
+    console.log(this.bandList[indexBand].bandMusicians);
     this.updateJsonFile();
+  }
+
+  removeMusicianFromBand(bandIndex, musicianIndex) {
+    const bandMembers = this.bandList[bandIndex].bandMusicians
+    
+    const removeFormerMembers = bandMembers.splice(musicianIndex, 1);
+    console.log("HEJ")
+    
+    console.log(removeFormerMembers);
+    this.bandList[bandIndex].musicianInfo = bandMembers
+   this.bandList[bandIndex].formerMembers.push(removeFormerMembers)
+    this.updateJsonFile();
+  }
+
+  showMusicianIndexInBand(index) {
+
+    console.log(this.bandList[index].bandMusicians);
+  }
+
+  removeBandFromMusicians(bandIndex2, artistIndex2) {
+    this.musicianList[bandIndex2].musicianBand = this.bandList[artistIndex2];
+    this.updateJsonFile2();
+  }
+
+
+
+
+  removeBandFromList(index) {
+    this.bandList.splice(index, 1);
+    this.showBandInfo();
+    this.updateJsonFile();
+  }
+
+  removeMusicianFromList(index) {
+    this.musicianList.splice(index, 1);
+    this.showMusicianInfo();
+    this.updateJsonFile2();
+  }
+
+  removeBand() {
+    this.showBandInfo();
+  
+  const select = prompt("Skriv in index för det band du vill ta bort ->");
+
+  if (Number(select).toString() === "NaN") { // Kollar så att val går att parsa till ett nummer.
+    console.log("Vänligen skriv in ett tal!");
+  }
+  if (select <= this.getLength() && select >= 1) {
+    this.removeBandFromList(Number(select) - 1); // Tar det inskrivna valet och minskar med 1. (för arrays index börjar på 0)
+    
+  } else {
+    console.log(`Talet måste vara mellan 1 och ${this.getLength()}`);
+  }
+  }
+  
+  removeMusician() {
+    this.showMusicianInfo();
+
+    const select2 = prompt("Skriv in index för den musiker du vill ta bort ->");
+
+    if (Number(select2).toString() === "NaN") { // Kollar så att val går att parsa till ett nummer.
+      console.log("Vänligen skriv in ett tal!");
+    }
+    if (select2 <= this.getLength2() && select2 >= 1) {
+      this.removeMusicianFromList(Number(select2) - 1); // Tar det inskrivna valet och minskar med 1. (för arrays index börjar på 0)
+
+    } else {
+      console.log(`Talet måste vara mellan 1 och ${this.getLength2()}`);
+    }
   }
 
   getLength() {
@@ -126,7 +194,7 @@ export default class middleList {
 
     for (let i = 0; i < this.bandList.length; i++) {
       //console.log(this.bandList.length);
-      tempList.push(this.bandList[i].dataInfoBand());
+      tempList.push(this.bandList[i]);
     }
     fs.writeFileSync("./bands.json", JSON.stringify(tempList, null, 2), (err) => {
       if (err) throw err;
@@ -139,7 +207,7 @@ export default class middleList {
 
     for (let i = 0; i < this.musicianList.length; i++) {
       //console.log(this.musicianList.length);
-      tempList2.push(this.musicianList[i].dataInfoMusician());
+      tempList2.push(this.musicianList[i]);
     }
     fs.writeFileSync("./musicians.json", JSON.stringify(tempList2, null, 2), (err) => {
       if (err) throw err;

@@ -1,8 +1,14 @@
 [
   {
-    "MusicianName": "hasse",
-    "MusicianInfo": "dansband",
-    "MusicianInstrument": "hartsfiol",
-    "MusicianBand": "hajarna"
+    "musicianName": "Yngve",
+    "musicianInfo": "dansband",
+    "musicianInstrument": "mungiga",
+    "musicianBand": "arnolds"
+  },
+  {
+    "musicianName": "Hasse",
+    "musicianInfo": "dansband",
+    "musicianInstrument": "bas",
+    "musicianBand": "Hasses"
   }
 ]
