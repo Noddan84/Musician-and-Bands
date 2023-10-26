@@ -11,12 +11,10 @@ export default class middleList {
   bandID = {};
   musicianList = [];
   musicianID = {};
-  
 
   constructor() {
     this.fetchBandData();
     this.fetchMusicianData();
-    
   }
 
   get bandList() {
@@ -30,7 +28,6 @@ export default class middleList {
   get BandAge() {
     const currentYear = new Date().getFullYear();
     return currentYear - this.bandBirth;
-
   }
 
   get MusicianAge() {
@@ -39,36 +36,38 @@ export default class middleList {
   }
 
   fetchBandData() {
-
     const data = fs.readFileSync("bands.json");
     this.bandList = JSON.parse(data);
   }
 
   fetchMusicianData() {
-
     const data2 = fs.readFileSync("musicians.json");
     this.musicianList = JSON.parse(data2);
   }
 
-
-
-
   showBandInfo() {
     for (let i = 0; i < this.bandList.length; i++) {
-      console.log(`${i + 1}. ${this.bandList[i].bandInfo}`); //skriver ut namn från bandklassen
-      console.log(`${i + 1}. ${this.bandList[i].bandName}`);      
-      console.log(`${i + 1}. ${this.bandList[i].bandBirth}`);
-      console.log(`${i + 1}. ${this.bandList[i].bandRetire}`);
-      console.log(`${i + 1}. ${this.bandList[i].bandMusicians}`);      
+      console.log("________________________________________");
+      console.log("Indexnumber: " + `${i + 1}`)
+      console.log("Musicgenre: " + `${this.bandList[i].bandInfo}`);
+      console.log("Bandname: " + `${this.bandList[i].bandName}`);
+      console.log("Birthyear: " + `${this.bandList[i].bandBirth}`);
+      console.log("Retireyear: " + `${this.bandList[i].bandRetire}`);
+      console.log("Bandmembers: " + `${this.bandList[i].bandMusicians}`);
+      console.log("________________________________________");
     }
   }
 
   showMusicianInfo() {
     for (let i = 0; i < this.musicianList.length; i++) {
-      console.log(`${i + 1}. ${this.musicianList[i].musicianInfo}`); //skriver ut namn från bandklassen
-      console.log(`${i + 1}. ${this.musicianList[i].musicianName}`);
-      console.log(`${i + 1}. ${this.musicianList[i].musicianInstrument}`);
-      console.log(`${i + 1}. ${this.musicianList[i].musicianBand}`);      
+      console.log("________________________________________");
+      console.log("Indexnumber: " + `${i + 1}`);
+      console.log("Musicgenre: " + `${this.musicianList[i].musicianInfo}`);
+      console.log("Name: " + `${this.musicianList[i].musicianName}`);
+      console.log("Instrument: " + `${this.musicianList[i].musicianInstrument}`);
+      console.log("Bandname: " + `${this.musicianList[i].musicianBand}`);
+      console.log("Birthyear: " + `${this.musicianList[i].musicianBirth}`)
+      console.log("________________________________________");
     }
   }
 
@@ -77,19 +76,14 @@ export default class middleList {
     let bandInfo = prompt("Into what genre does the band play?");
     let bandBirth = prompt("When was the band created?");
     let bandRetire = prompt("When did the band retire?");
-
     this.bandList.push(new Band(bandName, bandInfo, bandBirth, bandRetire));
-    
-
     console.log("add band to list");
-    this.updateJsonFile(); //uppdaterar bands.json    
+    this.updateJsonFile();    
   }
 
   addBandToMusician(indexBand2, indexMusician2) {
     this.musicianList[indexMusician2].musicianBand = this.bandList[indexBand2];
-    // console.log(this.artistList[indexArtist2].memberInfo);
     this.updateJsonFile2();
-
   }
 
   addMusicianToList() {
@@ -97,15 +91,16 @@ export default class middleList {
     let musicianInfo = prompt("What music does the musician play?");
     let musicianInstrument = prompt("What instrument does the musician play?");
     let musicianBand = prompt("Name a band this musician plays in.");
-
-    this.musicianList.push(new Musician(musicianName, musicianInfo, musicianInstrument, musicianBand));
-
-    console.log("add musician to list");
-    this.updateJsonFile2(); //uppdaterar musicians.json
+    let musicianBirth = prompt("Write birth of musician.");
+    const currentYear = new Date().getFullYear(); 
+    console.log("Musicians age is: ");
+    console.log((currentYear - musicianBirth));    
+    this.musicianList.push(new Musician(musicianName, musicianInfo, musicianInstrument, musicianBand, musicianBirth));
+    console.log("Add musician to list");
+    this.updateJsonFile2();
   }
 
   addMusicianToBand(indexBand, indexMusician) {
-
     this.bandList[indexBand].bandMusicians.push(this.musicianList[indexMusician]);
     console.log(this.bandList[indexBand].bandMusicians);
     this.updateJsonFile();
@@ -113,18 +108,14 @@ export default class middleList {
 
   removeMusicianFromBand(bandIndex, musicianIndex) {
     const bandMembers = this.bandList[bandIndex].bandMusicians
-    
     const removeFormerMembers = bandMembers.splice(musicianIndex, 1);
-    console.log("HEJ")
-    
     console.log(removeFormerMembers);
     this.bandList[bandIndex].musicianInfo = bandMembers
-   this.bandList[bandIndex].formerMembers.push(removeFormerMembers)
+    this.bandList[bandIndex].formerMembers.push(removeFormerMembers)
     this.updateJsonFile();
   }
 
   showMusicianIndexInBand(index) {
-
     console.log(this.bandList[index].bandMusicians);
   }
 
@@ -132,9 +123,6 @@ export default class middleList {
     this.musicianList[bandIndex2].musicianBand = this.bandList[artistIndex2];
     this.updateJsonFile2();
   }
-
-
-
 
   removeBandFromList(index) {
     this.bandList.splice(index, 1);
@@ -150,33 +138,27 @@ export default class middleList {
 
   removeBand() {
     this.showBandInfo();
-  
-  const select = prompt("Skriv in index för det band du vill ta bort ->");
+    const select = prompt("Write indexnumber for the band you want to remove: ");
+    if (Number(select).toString() === "NaN") {
+      console.log("Please write a number!");
+    }
+    if (select <= this.getLength() && select >= 1) {
+      this.removeBandFromList(Number(select) - 1);
+    } else {
+      console.log(`Number must be between 1 and ${this.getLength()}`);
+    }
+  }
 
-  if (Number(select).toString() === "NaN") { // Kollar så att val går att parsa till ett nummer.
-    console.log("Vänligen skriv in ett tal!");
-  }
-  if (select <= this.getLength() && select >= 1) {
-    this.removeBandFromList(Number(select) - 1); // Tar det inskrivna valet och minskar med 1. (för arrays index börjar på 0)
-    
-  } else {
-    console.log(`Talet måste vara mellan 1 och ${this.getLength()}`);
-  }
-  }
-  
   removeMusician() {
     this.showMusicianInfo();
-
-    const select2 = prompt("Skriv in index för den musiker du vill ta bort ->");
-
-    if (Number(select2).toString() === "NaN") { // Kollar så att val går att parsa till ett nummer.
-      console.log("Vänligen skriv in ett tal!");
+    const select2 = prompt("Write indexnumber for the musician you want to remove: ");
+    if (Number(select2).toString() === "NaN") {
+      console.log("Please write a number!");
     }
     if (select2 <= this.getLength2() && select2 >= 1) {
-      this.removeMusicianFromList(Number(select2) - 1); // Tar det inskrivna valet och minskar med 1. (för arrays index börjar på 0)
-
+      this.removeMusicianFromList(Number(select2) - 1);
     } else {
-      console.log(`Talet måste vara mellan 1 och ${this.getLength2()}`);
+      console.log(`Number must be between 1 and ${this.getLength2()}`);
     }
   }
 
@@ -184,16 +166,13 @@ export default class middleList {
     return this.bandList.length;
   }
 
-  getLength2()
-  {
+  getLength2() {
     return this.musicianList.length;
   }
 
   updateJsonFile() {
     let tempList = [];
-
     for (let i = 0; i < this.bandList.length; i++) {
-      //console.log(this.bandList.length);
       tempList.push(this.bandList[i]);
     }
     fs.writeFileSync("./bands.json", JSON.stringify(tempList, null, 2), (err) => {
@@ -204,9 +183,7 @@ export default class middleList {
 
   updateJsonFile2() {
     let tempList2 = [];
-
     for (let i = 0; i < this.musicianList.length; i++) {
-      //console.log(this.musicianList.length);
       tempList2.push(this.musicianList[i]);
     }
     fs.writeFileSync("./musicians.json", JSON.stringify(tempList2, null, 2), (err) => {

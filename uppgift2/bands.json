@@ -1,23 +1,30 @@
 [
   {
-    "bandInfo": "dansband",
-    "bandName": "helges",
-    "bandBirth": "2003",
-    "bandMusicians": {
-      "musicianName": "Yngve",
-      "musicianInfo": "dansband",
-      "musicianInstrument": "mungiga",
-      "musicianBand": "arnolds"
-    },
-    "bandRetire": "2006",
+    "bandInfo": "rock",
+    "bandName": "the killers",
+    "bandBirth": "1977",
+    "bandMusicians": [],
+    "bandRetire": "1986",
     "formerMembers": []
   },
   {
-    "bandInfo": "dansband",
-    "bandName": "Hasses",
-    "bandBirth": "'1999",
+    "bandInfo": "punk",
+    "bandName": "Kloak",
+    "bandBirth": "1979",
     "bandMusicians": [],
-    "bandRetire": "'2001",
-    "formerMembers": []
+    "bandRetire": "1992",
+    "formerMembers": [
+      [],
+      [
+        {
+          "musicianName": "Petra Kronelius",
+          "musicianInfo": "Opera",
+          "musicianInstrument": "Song",
+          "musicianBand": "La vie vocale",
+          "musicianBirth": "1967"
+        }
+      ]
+    ],
+    "musicianInfo": []
   }
 ]

@@ -1,14 +1,52 @@
 [
   {
-    "musicianName": "Yngve",
-    "musicianInfo": "dansband",
-    "musicianInstrument": "mungiga",
-    "musicianBand": "arnolds"
+    "musicianName": "Peter Eng",
+    "musicianInfo": "Reggae",
+    "musicianInstrument": "Congas",
+    "musicianBand": {
+      "bandInfo": "punk",
+      "bandName": "Kloak",
+      "bandBirth": "1979",
+      "bandMusicians": [
+        {
+          "musicianName": "Petra Kronelius",
+          "musicianInfo": "Opera",
+          "musicianInstrument": "Song",
+          "musicianBand": "La vie vocale",
+          "musicianBirth": "1967"
+        }
+      ],
+      "bandRetire": "1992",
+      "formerMembers": []
+    },
+    "musicianBirth": "1963"
   },
   {
-    "musicianName": "Hasse",
-    "musicianInfo": "dansband",
-    "musicianInstrument": "bas",
-    "musicianBand": "Hasses"
+    "musicianName": "Petra Kronelius",
+    "musicianInfo": "Opera",
+    "musicianInstrument": "Song",
+    "musicianBand": "La vie vocale",
+    "musicianBirth": "1967"
+  },
+  {
+    "musicianName": "Morihei Ueshiba",
+    "musicianInfo": "Japanese folkmusic",
+    "musicianInstrument": "Gong gong",
+    "musicianBand": "Way of Harmony",
+    "musicianBirth": "1883"
+  },
+  {
+    "musicianName": "Monique Moreau",
+    "musicianInfo": "Opera",
+    "musicianInstrument": "Song",
+    "musicianBand": "Sans Enfant",
+    "musicianBirth": "1956"
+  },
+  {
+    "musicianName": "Simon Belmont",
+    "musicianInfo": "Power Metal",
+    "musicianInstrument": "Organ",
+    "musicianBand": "Castlevania",
+    "musicianBirth": "1989"
   }
 ]

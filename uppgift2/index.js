@@ -1,16 +1,14 @@
-//import Bands from "./bands.json";
-//import Musicians from "./musicians.json";
 import Musician from "./musician.js";
 import Band from "./band.js";
 import middleList from "./middleList.js";
 import PromptSync from "prompt-sync";
-const prompt = PromptSync({ sigint: true })
+const prompt = PromptSync({ sigint: true });
 const mdlList = new middleList();
 
 
-let running = true; //Programmet körs - på/av
+let running = true; 
 
-function switchMenu(number) //Switch-menyn
+function switchMenu(number) 
 {
 
   switch (number) {
@@ -49,55 +47,52 @@ function switchMenu(number) //Switch-menyn
       break;
 
     case 7:
-      console.log("Add musician to band")
-      mdlList.showBandInfo()
-      const indexBand = Number(prompt("Skriv in nr på band du vill lägga till artisten: "))
-      //indexBand--
-      mdlList.showMusicianInfo()
-      const indexArtist = Number(prompt("Skriv in nr på musiker du vill lägga till bandet: "))
-      //indexArtist--
-      mdlList.addMusicianToBand(indexBand - 1, indexArtist - 1)
-      console.log("Artist have been added to Band")
-    
+      console.log("Add musician to band.");
+      mdlList.showBandInfo();          
+      const indexBand = Number(prompt("Write an indexnumber on the band you want to add the musician: "));      
+      mdlList.showMusicianInfo();
+      const indexArtist = Number(prompt("Write an indexnumber on the musician you want to add to the band: "));      
+      mdlList.addMusicianToBand(indexBand - 1, indexArtist - 1);
+      console.log("Musician have been added to band.");    
       break;
 
     case 8:
-      console.log("Remove musician from a band");
+      console.log("Remove musician from a band.");
       mdlList.showBandInfo();
-      const bandIndex = Number(prompt("Skriv in nr på band"));
-      mdlList.showMusicianIndexInBand(bandIndex - 1);
-      
-      //mdlList.showMusicianInfo();
-      const musicianIndex = Number(prompt("Skriv in nr på musiker"))
+      const bandIndex = Number(prompt("Write indexnumber on band: "));
+      mdlList.showMusicianIndexInBand(bandIndex - 1);      
+      const musicianIndex = Number(prompt("Write indexnumber on musician: "))
       mdlList.removeMusicianFromBand(bandIndex - 1, musicianIndex - 1);
       break;
 
     case 9:
-      console.log("Add band to musician")
-      mdlList.showMusicianInfo()
-      const indexArtist2 = Number(prompt("Skriv in nr på artist du vill lägga till bandet: "))
-      //indexArtist--
-      mdlList.showBandInfo()
-      const indexBand2 = Number(prompt("Skriv in nr på band du vill lägga till artisten: "))
-      //indexBand--
-      mdlList.addBandToMusician(indexBand2 - 1, indexArtist2 - 1)
-      console.log("Band have been added to musician")
+      console.log("Add band to musician.");
+      mdlList.showMusicianInfo();
+      const indexArtist2 = Number(prompt("Skriv in nr på artist du vill lägga till bandet: "));      
+      mdlList.showBandInfo();
+      const indexBand2 = Number(prompt("Skriv in nr på band du vill lägga till artisten: "));      
+      mdlList.addBandToMusician(indexBand2 - 1, indexArtist2 - 1);
+      console.log("Band have been added to musician.");
       break;
     
     case 10:
+      
       break;
     
     case 11:
+      console.log(welcomeMenu());
+      break;
+    
+    case 12:
       console.log("Program ends!");
       running = false;
       break;
 
-    default: // Felinmatning
+    default:
       console.log("You must write a number from the menu!");
       break;
   }
 }
-
 
 function codeCreator() {
    return ".:. CODE BY NODDAN84 .:.\n";
@@ -117,12 +112,11 @@ function welcomeMenu()
   [8]  - Remove musician from band
   [9]  - Add band to musician
   [10] - Remove band from musician
-  [11] - Finish program`
+  [11] - Show menu
+  [12] - Finish program`
 }
 
-
 console.log(codeCreator());
-console.log(welcomeMenu());
 
 while (running) {
   console.log(welcomeMenu());
